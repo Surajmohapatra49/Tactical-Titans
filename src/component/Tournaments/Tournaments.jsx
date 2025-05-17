@@ -1,5 +1,6 @@
 import React from "react";
 import { CalendarCheck, Gamepad2, Info } from "lucide-react";
+import Winners from "../Winners/Winners";
 
 const Tournaments = () => {
   const tournaments = [
@@ -31,60 +32,67 @@ const Tournaments = () => {
 
   return (
     <div className="pt-16 bg-gradient-to-b from-gray-900 to-black min-h-screen text-white">
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-5xl font-extrabold text-center mb-16 text-amber-400 tracking-wide drop-shadow-lg">
-          <Gamepad2
-            className="inline-block mr-3 mb-1 text-amber-500"
-            size={40}
-          />
+      <div className="container mx-auto px-6 py-12 max-w-7xl">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-20 text-amber-400 tracking-wide drop-shadow-lg flex justify-center items-center gap-4">
+          <Gamepad2 size={48} className="text-amber-500 animate-pulse" />
           Tournaments
         </h1>
 
         {/* Upcoming Tournaments */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold text-red-500 mb-8 flex items-center">
-            <CalendarCheck className="mr-2 text-red-600" /> Upcoming Tournaments
+        <section className="mb-24">
+          <h2 className="text-4xl md:text-3xl font-bold text-red-500 mb-10 flex items-center justify-center md:justify-start gap-3 drop-shadow-md">
+            <CalendarCheck size={28} className="text-red-600" />
+            Upcoming Tournaments
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {tournaments.map((tournament) => (
               <div
                 key={tournament.id}
-                className="bg-gradient-to-tr from-gray-800 to-gray-900 p-6 rounded-xl border-l-4 border-red-600 shadow-lg transform hover:scale-105 transition duration-300"
+                className="bg-gradient-to-tr from-gray-800 to-gray-900 p-8 rounded-3xl border-l-8 border-red-600 shadow-2xl hover:shadow-amber-400 transform hover:scale-105 transition duration-300 cursor-pointer"
               >
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-2xl text-amber-300 font-bold">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-2xl md:text-3xl text-amber-300 font-extrabold tracking-wide">
                     {tournament.title}
                   </h3>
-                  <span className="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                  <span
+                    className={`px-4 py-1 rounded-full text-xs font-semibold
+                      ${
+                        tournament.status === "Registration Open"
+                          ? "bg-green-600 text-green-100"
+                          : "bg-red-600 text-white"
+                      }`}
+                  >
                     {tournament.status}
                   </span>
                 </div>
-                <p className="text-gray-300 mb-1">
-                  <span className="text-red-400 font-medium">Game:</span>{" "}
+                <p className="text-gray-300 mb-2 text-lg">
+                  <span className="text-red-400 font-semibold">Game:</span>{" "}
                   {tournament.game}
                 </p>
-                <p className="text-gray-300 mb-1">
-                  <span className="text-red-400 font-medium">Date:</span>{" "}
+                <p className="text-gray-300 mb-2 text-lg">
+                  <span className="text-red-400 font-semibold">Date:</span>{" "}
                   {tournament.date}
                 </p>
-                <p className="text-gray-300 mb-4">
-                  <span className="text-red-400 font-medium">Prize Pool:</span>{" "}
+                <p className="text-gray-300 mb-6 text-lg">
+                  <span className="text-red-400 font-semibold">
+                    Prize Pool:
+                  </span>{" "}
                   {tournament.prize}
                 </p>
 
-                {tournament.id === 1 && (
-                  <div className="flex gap-3">
-                    <button className="bg-amber-500 hover:bg-amber-600 text-black font-semibold px-4 py-2 rounded w-full">
+                {tournament.status === "Registration Open" && (
+                  <div className="flex gap-4">
+                    <button className="bg-amber-500 hover:bg-amber-600 text-black font-semibold px-5 py-3 rounded-xl w-full shadow-md transition duration-200">
                       View Details
                     </button>
                     <button
-                      className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded w-full"
                       onClick={() =>
                         window.open(
                           "https://forms.gle/9ZuikgzASMkxK9ov8",
                           "_blank"
                         )
                       }
+                      className="bg-red-600 hover:bg-red-700 text-white font-semibold px-5 py-3 rounded-xl w-full shadow-md transition duration-200"
                     >
                       Register Now
                     </button>
@@ -97,27 +105,30 @@ const Tournaments = () => {
 
         {/* Tournament Rules */}
         <section>
-          <h2 className="text-3xl font-bold text-red-500 mb-6 flex items-center">
-            <Info className="mr-2 text-yellow-400" /> Tournament Rules
+          <h2 className="text-4xl md:text-3xl font-bold text-red-500 mb-8 flex items-center gap-3 justify-center md:justify-start drop-shadow-md">
+            <Info size={28} className="text-yellow-400" />
+            Tournament Rules
           </h2>
-          <div className="bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-700">
-            <ul className="list-disc list-inside text-gray-300 space-y-2 text-sm">
+          <div className="bg-gray-900 p-8 rounded-3xl shadow-2xl border border-gray-700 max-w-4xl mx-auto">
+            <ul className="list-disc list-inside text-gray-300 space-y-4 text-lg leading-relaxed">
               <li>
-                All participants must be registered members of Warrior Gaming
+                All participants must be registered members of Warrior Gaming.
               </li>
               <li>
-                Team registration deadlines are 48 hours before tournament start
+                Team registration deadlines are 48 hours before tournament
+                start.
               </li>
-              <li>All players must use approved gaming peripherals</li>
-              <li>Streaming rights are reserved by Warrior Gaming</li>
+              <li>All players must use approved gaming peripherals.</li>
+              <li>Streaming rights are reserved by Warrior Gaming.</li>
               <li>
                 Prize distribution will occur within 30 days of tournament
-                completion
+                completion.
               </li>
             </ul>
           </div>
         </section>
       </div>
+      <Winners />
     </div>
   );
 };

@@ -30,95 +30,97 @@ const Winners = () => {
     {
       id: 1,
       name: 'Michael "DeathBringer" Rodriguez',
-      achievements: "3x Champion, Most Valuable Player 2024",
+      achievements: "3x Champion, MVP 2024",
       games: "Valorant, CS:GO",
       inducted: "2024",
     },
     {
       id: 2,
       name: 'Sarah "Quantum" Park',
-      achievements: "World Record Holder, 5x Tournament Winner",
+      achievements: "World Record Holder, 5x Winner",
       games: "League of Legends, Dota 2",
       inducted: "2023",
     },
     {
       id: 3,
       name: "Team Dominance",
-      achievements: "Undefeated 2023 Season, International Champions",
+      achievements: "Undefeated 2023, Int’l Champions",
       games: "Multiple Titles",
       inducted: "2024",
     },
   ];
 
   return (
-    <div className="pt-16 bg-gradient-to-b from-gray-900 to-black min-h-screen text-white">
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-5xl font-extrabold text-center mb-16 text-amber-400 tracking-wide drop-shadow-lg">
-          <Trophy className="inline-block mr-3 mb-1 text-amber-500" size={40} />
+    <div className="min-h-screen bg-gradient-to-tr from-gray-900 via-black to-gray-800 text-white py-20 px-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <h1 className="flex items-center justify-center text-6xl font-extrabold mb-16 tracking-wide text-amber-400 drop-shadow-[0_0_10px_rgba(255,191,0,0.7)] gap-4">
+          <Trophy size={48} className="text-amber-500 animate-pulse" />
           Winners Circle
         </h1>
 
-        {/* Recent Winners Table */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold text-red-500 mb-6 flex items-center">
-            <Users className="mr-2 text-red-600" /> Recent Tournament Winners
+        {/* Recent Winners */}
+        <section className="mb-24">
+          <h2 className="flex items-center gap-3 mb-12 text-4xl font-bold text-red-500 drop-shadow-[0_0_10px_rgba(255,69,0,0.7)]">
+            <Users size={30} className="text-red-600" />
+            Recent Tournament Winners
           </h2>
-          <div className="overflow-x-auto shadow-xl rounded-xl border border-gray-700">
-            <table className="min-w-full bg-gray-800 text-sm text-left">
-              <thead className="bg-gray-700 text-amber-400 uppercase text-xs">
-                <tr>
-                  <th className="py-4 px-6">Tournament</th>
-                  <th className="py-4 px-6">Team</th>
-                  <th className="py-4 px-6">Prize</th>
-                  <th className="py-4 px-6">Date</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-600">
-                {recentWinners.map((winner) => (
-                  <tr
-                    key={winner.id}
-                    className="hover:bg-gray-700/80 transition duration-200"
-                  >
-                    <td className="py-4 px-6">{winner.tournament}</td>
-                    <td className="py-4 px-6 text-blue-300">{winner.team}</td>
-                    <td className="py-4 px-6 text-green-400 font-bold">
-                      {winner.prize}
-                    </td>
-                    <td className="py-4 px-6 text-gray-400">{winner.date}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {recentWinners.map(({ id, tournament, team, prize, date }) => (
+              <div
+                key={id}
+                className="relative bg-black/30 backdrop-blur-md border border-red-600 rounded-3xl p-8 text-center shadow-[0_0_30px_rgba(255,69,0,0.8)] transform transition-transform duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(255,191,0,0.9)] cursor-pointer"
+                style={{ perspective: "1000px" }}
+              >
+                <div className="transform hover:rotateY-6 hover:rotateX-4 transition-transform duration-400">
+                  <h3 className="text-2xl font-extrabold mb-3 text-amber-300 tracking-wide">
+                    {tournament}
+                  </h3>
+                  <p className="text-lg text-red-400 font-semibold mb-2 uppercase tracking-wide">
+                    {team}
+                  </p>
+                  <p className="text-green-400 font-bold text-xl mb-1">
+                    {prize}
+                  </p>
+                  <p className="text-gray-300 italic">{date}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* Hall of Fame */}
         <section>
-          <h2 className="text-3xl font-bold text-red-500 mb-8 flex items-center">
-            <Star className="mr-2 text-yellow-400" /> Hall of Fame
+          <h2 className="flex items-center gap-3 mb-12 text-4xl font-bold text-yellow-400 drop-shadow-[0_0_15px_rgba(255,215,0,0.8)]">
+            <Star size={30} />
+            Hall of Fame
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {hallOfFame.map((member) => (
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {hallOfFame.map(({ id, name, achievements, games, inducted }) => (
               <div
-                key={member.id}
-                className="bg-gradient-to-tr from-gray-800 to-gray-900 p-6 rounded-xl border-t-4 border-amber-500 shadow-lg transform hover:scale-105 transition duration-300"
+                key={id}
+                className="bg-black/30 backdrop-blur-md rounded-3xl border border-yellow-400 p-8 shadow-[0_0_35px_rgba(255,215,0,0.85)] transform transition-transform duration-500 hover:scale-105 hover:rotateY-6 cursor-pointer"
+                style={{ perspective: "1000px" }}
               >
-                <h3 className="text-2xl font-semibold text-amber-300 mb-2">
-                  {member.name}
+                <h3 className="text-3xl font-extrabold mb-4 tracking-wide text-amber-300">
+                  {name}
                 </h3>
-                <p className="text-gray-300 mb-2">
-                  <span className="text-red-500 font-medium">
-                    Achievements:
-                  </span>{" "}
-                  {member.achievements}
+                <p className="mb-4 text-lg text-gray-300 leading-relaxed">
+                  <span className="text-yellow-400 font-semibold">
+                    Achievements:{" "}
+                  </span>
+                  {achievements}
                 </p>
-                <p className="text-gray-300 mb-2">
-                  <span className="text-red-500 font-medium">Games:</span>{" "}
-                  {member.games}
+                <p className="mb-4 text-lg text-gray-300 leading-relaxed">
+                  <span className="text-yellow-400 font-semibold">Games: </span>
+                  {games}
                 </p>
-                <p className="text-gray-300">
-                  <span className="text-red-500 font-medium">Inducted:</span>{" "}
-                  {member.inducted}
+                <p className="text-gray-400 italic text-lg">
+                  <span className="text-yellow-400 font-semibold">
+                    Inducted:{" "}
+                  </span>
+                  {inducted}
                 </p>
               </div>
             ))}
